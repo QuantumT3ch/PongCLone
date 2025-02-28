@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\fresh\source\repos\PongClone\main.cpp(33,28): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\fresh\source\repos\PongClone\main.cpp(34,15): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  PongClone.vcxproj -> C:\Users\fresh\source\repos\PongClone\Debug\PongClone.exe

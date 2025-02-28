@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\fresh\source\repos\PongClone\main.cpp(23,28): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+C:\Users\fresh\source\repos\PongClone\main.cpp(24,15): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  ShaderProgram.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'SDL2_mixer.lib'
