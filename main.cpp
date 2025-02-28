@@ -60,7 +60,9 @@ BALL_SPRITE_FILEPATH[] = "Skippy.png",
 LOGO_SPRITE_FILEPATH[] = "Cyberpunk2077Logo.png",
 // Source:https://www.fontbolt.com/font/cyberpunk-font/
 PLAYER1_WIN_SPRITE_FILEPATH[] = "Player1.png",
-PLAYER2_WIN_SPRITE_FILEPATH[] = "Player2.png";
+PLAYER2_WIN_SPRITE_FILEPATH[] = "Player2.png",
+// Source: https://wallpapers.com/background/cyberpunk-2077-background-be8xyzvaav5ifwg5.html
+BACKGROUND_SPRITE_FILEPATH[] = "Cyberpunk2077BG.jpg";
 
 //constexpr float MINIMUM_COLLISION_DISTANCE = 1.0f;
 
@@ -72,7 +74,9 @@ INIT_POS_RIGHT_PADDLE = glm::vec3(4.0f, 0.0f, 0.0f),
 INIT_POS_LOGO = glm::vec3(0.0f, 3.2f, 0.0f),
 INIT_SCALE_LOGO = glm::vec3(4.5f, 1.0f, 0.0f),
 INIT_POS_WIN = glm::vec3(0.0f, 0.0f, 0.0f),
-INIT_SCALE_WIN = glm::vec3(4.5f, 1.5f, 0.0f);
+INIT_SCALE_WIN = glm::vec3(4.5f, 1.5f, 0.0f),
+INIT_POS_BG = glm::vec3(0.0f, 0.0f, 0.0f),
+INIT_SCALE_BG = glm::vec3(10.0f, 9.0f, 0.0f);
 
 SDL_Window* g_display_window;
 
@@ -86,7 +90,8 @@ g_ball_matrix,
 g_ball2_matrix,
 g_ball3_matrix,
 g_logo_matrix, 
-g_win_matrix;
+g_win_matrix,
+g_bg_matrix;
 
 float g_previous_ticks = 0.0f;
 
@@ -95,7 +100,8 @@ g_right_paddle_texture_id,
 g_ball_texture_id,
 g_logo_texture_id,
 g_win1_texture_id,
-g_win2_texture_id;
+g_win2_texture_id,
+g_bg_texture_id;
 
 constexpr float BALL_SPEED = 1.5f;
 constexpr float PLAYER_SPEED = 2.5f;
@@ -184,6 +190,10 @@ void initialise()
     g_win_matrix = glm::translate(g_win_matrix, INIT_POS_WIN);
     g_win_matrix = glm::scale(g_win_matrix, INIT_SCALE_WIN);
 
+    g_bg_matrix = glm::mat4(1.0f);
+    g_bg_matrix = glm::translate(g_bg_matrix, INIT_POS_BG);
+    g_bg_matrix = glm::scale(g_bg_matrix, INIT_SCALE_BG);
+
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
 
@@ -200,6 +210,7 @@ void initialise()
     g_logo_texture_id = load_texture(LOGO_SPRITE_FILEPATH);
     g_win1_texture_id = load_texture(PLAYER1_WIN_SPRITE_FILEPATH);
     g_win2_texture_id = load_texture(PLAYER2_WIN_SPRITE_FILEPATH);
+    g_bg_texture_id = load_texture(BACKGROUND_SPRITE_FILEPATH);
 
 
     // enable blending
@@ -581,29 +592,23 @@ void update()
    
     if (g_ball_position.x < INIT_POS_LEFT_PADDLE.x) {
         player_2_win = true;
-        //g_app_status = TERMINATED;
     }
     else if (g_ball_position.x > INIT_POS_RIGHT_PADDLE.x) {
         player_1_win = true;
-        //g_app_status = TERMINATED;
     }
 
     if (g_ball2_position.x < INIT_POS_LEFT_PADDLE.x) {
         player_2_win = true;
-        //g_app_status = TERMINATED;
     }
     else if (g_ball2_position.x > INIT_POS_RIGHT_PADDLE.x) {
         player_1_win = true;
-        //g_app_status = TERMINATED;
     }
     
     if (g_ball3_position.x < INIT_POS_LEFT_PADDLE.x) {
         player_2_win = true;
-        //g_app_status = TERMINATED;
     }
     else if (g_ball3_position.x > INIT_POS_RIGHT_PADDLE.x) {
         player_1_win = true;
-        //g_app_status = TERMINATED;
     }
     
     
@@ -638,6 +643,7 @@ void render() {
     glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // Bind texture
+    draw_object(g_bg_matrix, g_bg_texture_id);
     draw_object(g_logo_matrix, g_logo_texture_id);
     draw_object(g_ball_matrix, g_ball_texture_id);
     draw_object(g_left_paddle_matrix, g_left_paddle_texture_id);
