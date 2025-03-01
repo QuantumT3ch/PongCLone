@@ -537,7 +537,7 @@ void update()
     }
     
     if (left_x_distance < 0 && left_y_distance < 0 && can_ball3_collide) {
-        can_ball1_collide = false;
+        can_ball3_collide = false;
         g_ball3_movement.x = -g_ball3_movement.x + 0.1f;
         g_ball3_position.x = INIT_POS_LEFT_PADDLE.x + INIT_SCALE_PADDLE.x;
 
@@ -556,7 +556,7 @@ void update()
     }
 
     if (right_x_distance < 0 && right_y_distance < 0 && can_ball3_collide) {
-        can_ball1_collide = false;
+        can_ball3_collide = false;
         g_ball3_movement.x = -g_ball3_movement.x - 0.1f;
         g_ball3_position.x = INIT_POS_RIGHT_PADDLE.x - INIT_SCALE_PADDLE.x;
 
